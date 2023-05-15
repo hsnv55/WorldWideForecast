@@ -105,7 +105,8 @@ const styles = StyleSheet.create({
     marginLeft: 65,
   },
   buttonFiveDays: {
-    backgroundColor: 'silver',
+    opacity:0.6,
+    backgroundColor: '#AEB8DB',
     width: 270,
     height: 60,
     borderRadius: 15,
@@ -118,7 +119,8 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   scroll: {
-    backgroundColor: 'silver',
+    backgroundColor: '#AEB8DB',
+    opacity:0.6,
     width: 380,
     height: 340,
     marginTop: 150,

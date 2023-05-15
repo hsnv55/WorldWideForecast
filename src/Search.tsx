@@ -26,22 +26,20 @@ const Search = () => {
         <View style={{flexDirection: 'row'}}>
           <TouchableOpacity style={styles.buttonBackArrow} onPress={handleBack}>
             <Image
-              source={require('./backArrow.png')}
+              source={require('./aserst/img/backArrow.png')}
               style={styles.imageBackArrow}
             />
           </TouchableOpacity>
-          <Text style={styles.searchCity}>Search for City</Text>
-        </View>
+         
         <TextInput
           style={styles.input}
-          // onChangeText={onChangeText}
-          // value={text}
-        >
-          {/* <Image
-            source={require('./iconSearch.png')}
-            style={styles.iconSearch}
-          /> */}
+          placeholder='source weather of city... '
+          placeholderTextColor={"#596672"}
+          
+        
+          >
         </TextInput>
+          </View>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -61,23 +59,28 @@ const styles = StyleSheet.create({
   imageBackArrow: {
     width: 30,
     height: 30,
+    marginLeft:4,
+    marginTop:3
   },
   buttonBackArrow: {
-    backgroundColor: 'silver',
-    width: 30,
-    height: 30,
+    backgroundColor: '#A9ADBA',
+  
+    width: 40,
+    height: 40,
     borderRadius: 5,
     marginTop: 20,
     marginLeft: 10,
   },
   input: {
-    backgroundColor: 'silver',
-    width: 350,
+    backgroundColor: '#A9ADBA',
+    width: 300,
     height: 40,
-    marginTop: 40,
+    marginTop: 20,
     marginLeft: 23,
     borderRadius: 10,
     fontWeight: '500',
+    color:"black"
+    
     // fontSize: 20,
   },
   searchCity: {
