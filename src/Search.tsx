@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
-import {Text} from 'react-native-svg';
 
 const apiKey = 'b1e3a0c6229dabb71a7d0990b34ca2d8';
 const apiUrl = `https://api.openweathermap.org/data/2.5/weather?&appid=${apiKey}&units=metric&q=`;
@@ -27,8 +26,6 @@ const Search = () => {
     const urlApi = await fetch(apiUrl + value);
     const data = await urlApi.json();
     console.log(data);
-    // const res = await urlApi.json();
-    // console.log(res[0]);
     setCurrenWeather(data);
   };
   const onChangeText = (text: string) => {
@@ -43,7 +40,7 @@ const Search = () => {
         <View style={{flexDirection: 'row'}}>
           <TouchableOpacity style={styles.buttonBackArrow} onPress={handleBack}>
             <Image
-              source={require('./backArrow.png')}
+              source={require('./aserst/img/backArrow.png')}
               style={styles.imageBackArrow}
             />
           </TouchableOpacity>
@@ -80,6 +77,8 @@ const styles = StyleSheet.create({
   imageBackArrow: {
     width: 30,
     height: 30,
+    marginLeft: 4,
+    marginTop: 3,
   },
   buttonBackArrow: {
     backgroundColor: '#A9ADBA',

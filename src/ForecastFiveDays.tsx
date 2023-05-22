@@ -43,7 +43,7 @@ const ForecastFiveDays = () => {
         <View style={{flexDirection: 'row'}}>
           <TouchableOpacity style={styles.buttonBackArrow} onPress={handleBack}>
             <Image
-              source={require('./backArrow.png')}
+              source={require('./aserst/img/backArrow.png')}
               style={styles.imageBackArrow}
             />
           </TouchableOpacity>
