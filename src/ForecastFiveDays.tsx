@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   ImageBackground,
   SafeAreaView,
@@ -9,13 +10,30 @@ import {
   Text,
   View,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 const ForecastFiveDays = () => {
   const navigation = useNavigation();
   const handleBack = () => {
     navigation.goBack();
   };
+  // const ForecastFiveDays = (props: any) => {
+  //   const navigation = useNavigation();
+  //   const route = useRoute();
+  //   const handleBack = () => {
+  //     navigation.goBack();
+  //   };
+  //   const reqwest = async () => {
+  //     const response = await fetch(
+  //       `http://www.themealdb.com/api/json/v1/1/lookup.php?i=${route.params.idMeal}`,
+  //     );
+  //     const data = await response.json();
+  //     console.log(data);
+  //   };
+
+  //   useEffect(() => {
+  //     reqwest();
+  //   }, [route.params.idMeal]);
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -29,7 +47,7 @@ const ForecastFiveDays = () => {
               style={styles.imageBackArrow}
             />
           </TouchableOpacity>
-          <Text style={styles.sevenDays}>7 Days</Text>
+          <Text style={styles.fiveDays}>5 Days</Text>
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -52,18 +70,18 @@ const styles = StyleSheet.create({
     height: 30,
   },
   buttonBackArrow: {
-    backgroundColor: 'silver',
-    width: 30,
-    height: 30,
+    backgroundColor: '#A9ADBA',
+    width: 35,
+    height: 35,
     borderRadius: 5,
     marginTop: 20,
     marginLeft: 10,
   },
-  sevenDays: {
+  fiveDays: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: '500',
-    marginLeft: 120,
+    marginLeft: 110,
     marginTop: 20,
   },
 });

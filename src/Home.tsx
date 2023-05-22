@@ -1,5 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+// import React, { useEffect, useState } from 'react';
 import {
   Image,
   ImageBackground,
@@ -17,6 +18,21 @@ const Home = () => {
   const handleSearch = () => {
     navigation.navigate('ForecastScreen');
   };
+  // const Home = (props) => {
+  //   const [meals, setMeals] = useState([]);
+  //   const navigation = useNavigation();
+  //   const reqwest = async() => {
+  //     const response = await fetch('http://www.themealdb.com/api/json/v1/1/search.php?f=a');
+  //     const data = await response.json();
+  //     setMeals(data.meals);
+  //   };
+  //   console.log(meals);
+  //   useEffect(() => {
+  //     reqwest();
+  //   }, []);
+  //   const handleSearch = () => {
+  //     props.navigation.navigate('ForecastScreen', {idMeal: meals[0].idMeal});
+  //   };
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView>
@@ -105,7 +121,8 @@ const styles = StyleSheet.create({
     marginLeft: 65,
   },
   buttonFiveDays: {
-    backgroundColor: 'silver',
+    opacity: 0.7,
+    backgroundColor: '#AEB8DB',
     width: 270,
     height: 60,
     borderRadius: 15,
@@ -115,10 +132,11 @@ const styles = StyleSheet.create({
   buttonTextFiveDays: {
     color: 'black',
     fontSize: 20,
-    fontWeight: '400',
+    fontWeight: '500',
   },
   scroll: {
-    backgroundColor: 'silver',
+    opacity: 0.7,
+    backgroundColor: '#AEB8DB',
     width: 380,
     height: 340,
     marginTop: 150,
@@ -129,52 +147,52 @@ const styles = StyleSheet.create({
     color: 'black',
     lineHeight: 80,
     fontSize: 40,
-    fontWeight: '200',
+    fontWeight: '400',
     textAlign: 'center',
   },
   textFelt: {
     color: 'black',
     marginLeft: 30,
     fontSize: 20,
-    fontWeight: '200',
+    fontWeight: '300',
   },
   textFeltResult: {
     color: 'black',
     marginLeft: 30,
     fontSize: 30,
-    fontWeight: '300',
+    fontWeight: '400',
   },
   textWindSpeed: {
     color: 'black',
     marginLeft: 30,
     fontSize: 20,
-    fontWeight: '200',
+    fontWeight: '300',
     lineHeight: 40,
   },
   textWindSpeedResult: {
     color: 'black',
     marginLeft: 30,
     fontSize: 30,
-    fontWeight: '300',
+    fontWeight: '400',
   },
   textHumidity: {
     color: 'black',
     marginLeft: 30,
     fontSize: 20,
-    fontWeight: '200',
+    fontWeight: '300',
     lineHeight: 40,
   },
   textHumidityResult: {
     color: 'black',
     marginLeft: 30,
     fontSize: 30,
-    fontWeight: '300',
+    fontWeight: '400',
   },
   textRainy: {
     color: 'black',
     marginLeft: 190,
     fontSize: 20,
-    fontWeight: '200',
+    fontWeight: '300',
     lineHeight: 40,
     marginTop: -200,
   },
