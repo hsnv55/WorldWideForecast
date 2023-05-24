@@ -17,23 +17,6 @@ const ForecastFiveDays = () => {
   const handleBack = () => {
     navigation.goBack();
   };
-  // const ForecastFiveDays = (props: any) => {
-  //   const navigation = useNavigation();
-  //   const route = useRoute();
-  //   const handleBack = () => {
-  //     navigation.goBack();
-  //   };
-  //   const reqwest = async () => {
-  //     const response = await fetch(
-  //       `http://www.themealdb.com/api/json/v1/1/lookup.php?i=${route.params.idMeal}`,
-  //     );
-  //     const data = await response.json();
-  //     console.log(data);
-  //   };
-
-  //   useEffect(() => {
-  //     reqwest();
-  //   }, [route.params.idMeal]);
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -41,9 +24,9 @@ const ForecastFiveDays = () => {
         source={require('./wetherBackground.png')}
         style={styles.mainImage}>
         <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity style={styles.buttonBackArrow} onPress={handleBack}>
+          <TouchableOpacity onPress={handleBack}>
             <Image
-              source={require('./aserst/img/backArrow.png')}
+              source={require('./backArrow.png')}
               style={styles.imageBackArrow}
             />
           </TouchableOpacity>
@@ -68,14 +51,8 @@ const styles = StyleSheet.create({
   imageBackArrow: {
     width: 30,
     height: 30,
-  },
-  buttonBackArrow: {
-    backgroundColor: '#A9ADBA',
-    width: 35,
-    height: 35,
-    borderRadius: 5,
-    marginTop: 20,
-    marginLeft: 10,
+    marginLeft: 15,
+    marginTop: 15,
   },
   fiveDays: {
     color: 'white',

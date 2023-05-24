@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react-native/no-inline-styles */
 import {
@@ -5,6 +6,7 @@ import {
   ImageBackground,
   SafeAreaView,
   StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
   View,
@@ -22,6 +24,7 @@ const Search = () => {
   const handleBack = () => {
     navigation.goBack();
   };
+
   const getWeather = async () => {
     const urlApi = await fetch(apiUrl + value);
     const data = await urlApi.json();
@@ -38,25 +41,29 @@ const Search = () => {
         source={require('./imageSearch.png')}
         style={styles.mainImage}>
         <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity style={styles.buttonBackArrow} onPress={handleBack}>
-            <Image
-              source={require('./aserst/img/backArrow.png')}
-              style={styles.imageBackArrow}
-            />
-          </TouchableOpacity>
           <TouchableOpacity style={styles.buttonSearch} onPress={getWeather}>
             <TextInput
-              // value={value}
               placeholder="Search for City"
               placeholderTextColor={'black'}
               onChangeText={onChangeText}
+              // onEndEditing={handleSearchResult}
             />
           </TouchableOpacity>
-          {/* {currenWeather?.map((item, index) => (
-            <View key={index}>
-              <Text>{item.main.name}</Text>
-            </View>
-          ))} */}
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{color: 'white', fontSize: 20}}>
+            {currenWeather.name}
+          </Text>
+        </View>
+        <View
+          style={{
+            backgroundColor: 'red',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          {currenWeather.cod == 404 && (
+            <Text style={{color: 'white', fontSize: 35}}>"city not found"</Text>
+          )}
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -90,7 +97,7 @@ const styles = StyleSheet.create({
   },
   buttonSearch: {
     backgroundColor: '#A9ADBA',
-    width: 300,
+    width: 350,
     height: 35,
     marginTop: 20,
     marginLeft: 23,

@@ -15,24 +15,10 @@ import {useNavigation} from '@react-navigation/native';
 
 const Home = () => {
   const navigation = useNavigation();
-  const handleSearch = () => {
+  const handleFiveDays = () => {
     navigation.navigate('ForecastScreen');
   };
-  // const Home = (props) => {
-  //   const [meals, setMeals] = useState([]);
-  //   const navigation = useNavigation();
-  //   const reqwest = async() => {
-  //     const response = await fetch('http://www.themealdb.com/api/json/v1/1/search.php?f=a');
-  //     const data = await response.json();
-  //     setMeals(data.meals);
-  //   };
-  //   console.log(meals);
-  //   useEffect(() => {
-  //     reqwest();
-  //   }, []);
-  //   const handleSearch = () => {
-  //     props.navigation.navigate('ForecastScreen', {idMeal: meals[0].idMeal});
-  //   };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView>
@@ -63,7 +49,7 @@ const Home = () => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.buttonFiveDays}
-              onPress={handleSearch}>
+              onPress={handleFiveDays}>
               <Text style={styles.buttonTextFiveDays}>5-day forecast</Text>
             </TouchableOpacity>
           </View>
@@ -121,7 +107,7 @@ const styles = StyleSheet.create({
     marginLeft: 65,
   },
   buttonFiveDays: {
-    opacity: 0.7,
+    opacity: 0.8,
     backgroundColor: '#AEB8DB',
     width: 270,
     height: 60,
