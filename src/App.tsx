@@ -11,6 +11,7 @@ import Icon from './aserst/icon/search';
 import HomeIcon from './aserst/icon/home';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import SplashScreen from 'react-native-splash-screen';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 // const Svg = Circle();
@@ -82,4 +83,4 @@ export default App;
 // 1. Когда хотим узнать программу на 5дн нужно чтобы выходила реальная инфа
 // 2. Нужно чтобы на главном экране находилось реальная инфа
 // 3. В Search нужно чтобы при вводе городов выходила реальная инфа
-// 4. В Search при нажатие на Enter нужно чтобы нас перекинуло на новый +экран
+// 4. В Search при нажатие на Enter нужно чтобы нас перекинуло на новый +экранcd
