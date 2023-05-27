@@ -1,54 +1,50 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React, {useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from './Home';
 import ForecastFiveDays from './ForecastFiveDays';
 import Search from './Search';
-import { Image } from 'react-native';
+import {Image} from 'react-native';
 // import Svg, {Circle} from 'react-native-svg';
 import Icon from './aserst/icon/search';
 import HomeIcon from './aserst/icon/home';
-import { ScrollView } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {ScrollView} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 // const Svg = Circle();
 
 const TabNavigator = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
-    
-    <Tab.Navigator >
+    <Tab.Navigator>
       <Tab.Screen
         options={{
-          tabBarStyle:{
-            backgroundColor:"#AEB8DB",
+          tabBarStyle: {
+            backgroundColor: '#AEB8DB',
           },
           header: () => null,
-          tabBarIcon: ({ focused, color }) => (
-            <HomeIcon />
-          ),
+          tabBarIcon: ({focused, color}) => <HomeIcon />,
         }}
-
         name="Home"
         component={Home}
       />
       <Tab.Screen
         options={{
-          tabBarStyle:{
-            backgroundColor:"#A9ADBA",
+          tabBarStyle: {
+            backgroundColor: '#A9ADBA',
           },
           header: () => null,
-          tabBarIcon: ({ focused, color }) => (
-            <Icon />
-          ),
+          tabBarIcon: ({focused, color}) => <Icon />,
         }}
         name="Search"
         component={Search}
       />
     </Tab.Navigator>
-  
   );
 };
 
@@ -56,17 +52,17 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={{ header: () => null }}
+        screenOptions={{header: () => null}}
         initialRouteName="Home">
         <Stack.Screen
           name="HomeScreen"
           component={TabNavigator}
-          options={{ header: () => null }}
+          options={{header: () => null}}
         />
         <Stack.Screen
           name="ForecastScreen"
           component={ForecastFiveDays}
-          options={{ header: () => null }}
+          options={{header: () => null}}
         />
       </Stack.Navigator>
     </NavigationContainer>
