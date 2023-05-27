@@ -1,6 +1,5 @@
-/* eslint-disable eqeqeq */
-/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react-native/no-inline-styles */
+import React from 'react';
 import {
   Image,
   ImageBackground,

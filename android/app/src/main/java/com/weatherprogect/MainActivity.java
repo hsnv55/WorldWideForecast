@@ -5,6 +5,7 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
+import org.devio.rn.splashscreen.SplashScreen;
 
 public class MainActivity extends ReactActivity {
 
@@ -16,11 +17,15 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "WeatherProgect";
   }
-
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(null);
-  }
+   @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.show(this);  
+        super.onCreate(savedInstanceState);
+    }
+  // @Override
+  // protected void onCreate(Bundle savedInstanceState) {
+  //   super.onCreate(null);
+  // }
 
   /**
    * Returns the instance of the {@link ReactActivityDelegate}. Here we use a util class {@link
@@ -38,4 +43,5 @@ public class MainActivity extends ReactActivity {
         DefaultNewArchitectureEntryPoint.getConcurrentReactEnabled() // concurrentRootEnabled
         );
   }
+  
 }
