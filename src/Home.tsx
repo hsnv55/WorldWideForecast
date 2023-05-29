@@ -16,7 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 const Home = () => {
   const navigation = useNavigation();
   const handleFiveDays = () => {
-    navigation.navigate('ForecastScreen');
+    navigation.navigate('ForecastScreen',)
   };
 
   return (
