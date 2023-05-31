@@ -40,7 +40,6 @@ const Search = () => {
         source={require('./wetherBackground.png')}
         style={styles.mainImage}
       >
-       <View style={{ flexDirection: 'row', gap: 10 }}>
           <TouchableOpacity
             style={styles.buttonBackArrow}
             onPress={onGetData}
@@ -50,13 +49,21 @@ const Search = () => {
               style={styles.imageBackArrow}
             />
           </TouchableOpacity>
+          <Text style = {styles.textSfC}>
+            Search for City
+          </Text>
+          <View style = {styles.searchLine}>
+              <Image source = { require('./locationnn.png')}
+              style = {styles.locationButton}
+              />           
           <TextInput
             style={styles.textInput}
             placeholder="Search for City"
             placeholderTextColor={'black'}
             onChangeText={onChangeText}
           />
-        </View>
+          </View>
+       
         <Text style={{ color: 'white', fontSize:40,alignSelf:'center'}}>
             {weather.name}, {weather.sys?.country}
           </Text>
@@ -117,36 +124,54 @@ const styles = StyleSheet.create({
     height: 1000,
   },
   imageBackArrow: {
-    width: 30,
-    height: 30,
-    marginLeft: 4,
-    marginTop: 3,
+    width: 26,
+    height: 26,
+    alignSelf:'center'
   },
   buttonBackArrow: {
-    backgroundColor: '#A9ADBA',
+    backgroundColor: 'silver',
     width: 35,
-    height: 40,
-    borderRadius: 5,
-    marginTop: 20,
-    marginLeft: 10,
-  },
-  buttonSearch: {
-    backgroundColor: '#A9ADBA',
-    width: 350,
     height: 35,
-    marginTop: 20,
-    marginLeft: 23,
-    borderRadius: 10,
+    borderRadius: 5,
+    marginTop: 10,
+    marginLeft: 15,
+    justifyContent:'center'
+  },
+  textSfC:{
+    width:330,
+    height:50,
+    textAlign:'center',
+    fontSize:18,
+    color:'black',
+    fontWeight:'600',
+    fontFamily:'Poppins',
+    lineHeight:20,
+    fontStyle:'normal',
+   
+   
+  },
+  locationButton:{
+    width:35,
+    height:35,
+    borderRadius:50,
+   backgroundColor:'silver',
+    opacity:0.7
+
   },
   textInput: {
-    width: 300,
-    height: 40,
+    width: 335,
+    height: 38,
     fontSize: 16,
     paddingHorizontal: 10,
-    borderRadius: 5,
-    backgroundColor: '#fff',
-    marginRight: 10,
-    marginTop:20
+    borderRadius: 15,
+    backgroundColor: 'silver',
+    
+    
+  },
+  searchLine:{
+    flexDirection:"row-reverse",
+    marginLeft:30,
+    gap:6
   },
   weatherIcon: {
     width: 100,
