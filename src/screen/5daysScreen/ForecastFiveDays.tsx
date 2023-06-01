@@ -10,19 +10,18 @@ import {
   Text,
   View,
 } from 'react-native';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import Wwe from '../navigation/nav';
+import Wwe from '../../navigation/nav';
 
 const ForecastFiveDays = () => {
-//   const navigation = useNavigation();
-//   const handleBack = () => {
-//     navigation.goBack();
-//   };
+  //   const navigation = useNavigation();
+  //   const handleBack = () => {
+  //     navigation.goBack();
+  //   };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ImageBackground
-        source={require('../assets/gifs/five-daysFon.gif')}
+        source={require('../../assets/gifs/five-daysFon.gif')}
         style={styles.mainImage}>
         <View style={{flexDirection: 'row'}}>
           <Wwe />

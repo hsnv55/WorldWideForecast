@@ -4,13 +4,14 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from './screen/Home';
-import ForecastFiveDays from './screen/ForecastFiveDays';
-import Search from './screen/Search';
-import HistoryScreen from './screen/History';
+import Home from './screen/HomeScreen/Home';
+import ForecastFiveDays from './screen/5daysScreen/ForecastFiveDays';
+import Search from './screen/SearchScreen/Search';
+import HistoryScreen from './screen/HistoryScreen/History';
 import HomeSvg from './svg/homeSvg.svg';
 import SearchSvg from './svg/searchSvg.svg';
 import HistorySvg from './svg/historySvg.svg';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -65,22 +66,24 @@ const TabNavigator = () => (
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{header: () => null}}
-        initialRouteName="Home">
-        <Stack.Screen
-          name="HomeScreen"
-          component={TabNavigator}
-          options={{header: () => null}}
-        />
-        <Stack.Screen
-          name="ForecastScreen"
-          component={ForecastFiveDays}
-          options={{header: () => null}}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{header: () => null}}
+          initialRouteName="Home">
+          <Stack.Screen
+            name="HomeScreen"
+            component={TabNavigator}
+            options={{header: () => null}}
+          />
+          <Stack.Screen
+            name="ForecastScreen"
+            component={ForecastFiveDays}
+            options={{header: () => null}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 

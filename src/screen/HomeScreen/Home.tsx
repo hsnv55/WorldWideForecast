@@ -1,6 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react-native/no-inline-styles */
-// import React, { useEffect, useState } from 'react';
 import {
   Image,
   ImageBackground,
@@ -29,13 +28,13 @@ const Home = () => {
           style={styles.image}>
           <Text style={styles.textBaku}>Baku</Text>
           <Image
-            source={require('../assets/icons/iconCloudy.png')}
+            source={require('../../assets/icons/iconCloudy.png')}
             style={styles.iconImage}
           />
           <View style={{flexDirection: 'row', marginLeft: 130}}>
             <Text style={styles.textTemperature}>17</Text>
             <Image
-              source={require('../assets/icons/degreeTemperatureIcon.png')}
+              source={require('../../assets/icons/degreeTemperatureIcon.png')}
               style={styles.imageDegree}
             />
           </View>

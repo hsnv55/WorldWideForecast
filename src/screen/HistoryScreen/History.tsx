@@ -6,7 +6,7 @@ const History = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ImageBackground
-        source={require('../assets/images/historyFon.png')}
+        source={require('../../assets/images/historyFon.png')}
         style={styles.mainImage}
       />
     </SafeAreaView>
