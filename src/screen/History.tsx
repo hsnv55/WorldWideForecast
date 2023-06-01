@@ -1,14 +1,20 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {ImageBackground, StyleSheet} from 'react-native';
+import {ImageBackground, ImageComponent, StyleSheet, View} from 'react-native';
+import Search from './Search';
+import { Image, Text} from 'react-native-svg';
 
-const History = () => {
+const History = ({name}) => {
+  console.log(name)
   return (
+    
     <SafeAreaView style={styles.mainContainer}>
+    
       <ImageBackground
         source={require('../assets/images/historyFon.png')}
         style={styles.mainImage}
       />
+  {/* <View style={{backgroundColor:'red'}}><Text >{name}</Text></View> */}
     </SafeAreaView>
   );
 };
@@ -29,6 +35,11 @@ const styles = StyleSheet.create({
     height: 30,
     marginLeft: 4,
     marginTop: 3,
+  },
+  textLeft: {
+    color: 'black',
+    fontSize: 30,
+    fontWeight: '200',
   },
   buttonBackArrow: {
     backgroundColor: '#A9ADBA',

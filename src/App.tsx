@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
-import React, { useEffect } from 'react';
-import SplashScreen from 'react-native-splash-screen';
+import React, { startTransition, useEffect } from 'react';
+import SplashScreen from 'react-native-splash-screen'
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -12,6 +12,8 @@ import HistoryScreen from './screen/History';
 import HomeSvg from './svg/homeSvg.svg';
 import SearchSvg from './svg/searchSvg.svg';
 import HistorySvg from './svg/historySvg.svg';
+import { Provider } from 'react-redux';
+import { store } from './reduxs/store';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -69,6 +71,7 @@ const App = () => {
     SplashScreen.hide();
   }, []);
   return (
+    <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{header: () => null}}
@@ -85,6 +88,7 @@ const App = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 };
 

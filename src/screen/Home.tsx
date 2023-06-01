@@ -12,11 +12,28 @@ import {
   View,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import Geolocation from '@react-native-community/geolocation';
+import { useEffect, useState } from 'react';
 
 const Home = () => {
   const navigation = useNavigation();
   const handleFiveDays = () => {
     navigation.navigate('ForecastScreen',)
+  };
+  const [currenDayWeather, setCurrenDayWeather] = useState([]);
+  useEffect(() => {
+    Geolocation.getCurrentPosition(info => {
+      request(info.coords.latitude, info.coords.longitude);
+    });
+  }, []);
+
+  const request = async (lat: number, lon: number) => {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=b1e3a0c6229dabb71a7d0990b34ca2d8`,
+    );
+    const data = await response.json();
+    setCurrenDayWeather(data);
+    console.log(data);
   };
 
   return (
@@ -27,27 +44,45 @@ const Home = () => {
             uri: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9UjvVt9mzQM8eWqYXfsLHBsUJXIKhQdh86mcJUNdi_PzL7YtOi6Irm8IqQyWhMnqxXvhGH1DmFFyyuF6zww6Td6VMkbe07Lpv-IwfE1tKp0UhL5J_KozpFwenxAf3mANsFi8zb1UBcKg3lfEcVw77Hf5lMSSGOXlia1yWHzl2IrDdnCHUkJckA4ip3A/s960/Anime%20sky%20landscape%20live%20wallpaper.gif',
           }}
           style={styles.image}>
-          <Text style={styles.textBaku}>Baku</Text>
           <Image
             source={require('../assets/icons/iconCloudy.png')}
             style={styles.iconImage}
           />
-          <View style={{flexDirection: 'row', marginLeft: 130}}>
-            <Text style={styles.textTemperature}>17</Text>
-            <Image
-              source={require('../assets/icons/degreeTemperatureIcon.png')}
-              style={styles.imageDegree}
-            />
+            <View style={styles.container}>
+            <View style={styles.resultBackground}>
+            <Text style={styles.cityNameText}>{currenDayWeather.name}</Text>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.textLeft}>Temperature:</Text>
+              <Text style={styles.textRight}> {currenDayWeather.main?.temp}C</Text>
+              {/* temp={Math.round(temp)} */}
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.textLeft}>Feels like:</Text>
+              <Text style={styles.textRight}>
+                {currenDayWeather.main?.feels_like}C
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.textLeft}>Humidity:</Text>
+              <Text style={styles.textRight}>
+                {currenDayWeather.main?.humidity}%
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.textLeft}>Wind speed:</Text>
+              <Text style={styles.textRight}>
+                {currenDayWeather.wind?.speed}km/h
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.textLeft}>Pressure:</Text>
+              <Text style={styles.textRight}>
+                {currenDayWeather.main?.pressure}
+              </Text>
+            </View>
           </View>
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: '600',
-              color: 'white',
-              textAlign: 'center',
-            }}>
-            Friday, 26 August 2022 | 10:00
-          </Text>
+          </View>
+       
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.buttonFiveDays}
@@ -55,15 +90,7 @@ const Home = () => {
               <Text style={styles.buttonTextFiveDays}>5-day forecast</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.scroll}>
-            <Text style={styles.textMoreForToday}>More for today</Text>
-            <Text style={styles.textFelt}>Felt</Text>
-            <Text style={styles.textFeltResult}>13C</Text>
-            <Text style={styles.textWindSpeed}>Wind speed</Text>
-            <Text style={styles.textWindSpeedResult}>40.4 km/h</Text>
-            <Text style={styles.textHumidity}>Humidity</Text>
-            <Text style={styles.textHumidityResult}>61%</Text>
-          </View>
+    
         </ImageBackground>
       </ScrollView>
     </SafeAreaView>
@@ -76,13 +103,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
-  textBaku: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: 'white',
-    marginLeft: 165,
-    marginTop: 20,
-  },
+
   image: {
     flex: 1,
     width: 417,
@@ -94,16 +115,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginLeft: 110,
   },
-  textTemperature: {
-    fontSize: 110,
-    fontWeight: '300',
-    color: 'white',
-  },
-  imageDegree: {
-    width: 20,
-    height: 20,
-    marginTop: 37,
-  },
+ 
   buttonContainer: {
     marginTop: 200,
     marginLeft: 65,
@@ -122,66 +134,59 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
   },
-  scroll: {
-    opacity: 0.7,
-    backgroundColor: '#AEB8DB',
-    width: 380,
-    height: 340,
-    marginTop: 150,
-    marginLeft: 7,
-    borderRadius: 15,
+  mainContainer2: {
+    flex: 1,
   },
-  textMoreForToday: {
+  mainImage: {
+    flex: 1,
+    // width: 417,
+    // width: '100%',
+    height: 1000,
+  },
+  input: {
+    backgroundColor: 'white',
+    width: 350,
+    height: 45,
+    marginTop: 20,
+    marginLeft: 23,
+    borderRadius: 10,
+  },
+  container: {
+    // flex: 1,
+    // opacity: 0.5,
+    // justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 90,
+    marginRight:25
+  },
+  resultBackground: {
+    backgroundColor: 'white',
+    borderRadius: 15,
+    width: 350,
+    height: 500,
+    gap: 30,
+    opacity: 0.8,
+  },
+  cityNameText: {
     color: 'black',
-    lineHeight: 80,
-    fontSize: 40,
-    fontWeight: '400',
+    fontSize: 30,
+    fontWeight: '500',
     textAlign: 'center',
   },
-  textFelt: {
+  textLeft: {
     color: 'black',
-    marginLeft: 30,
-    fontSize: 20,
+    fontSize: 30,
+    fontWeight: '200',
+  },
+  textRight: {
+    color: 'black',
+    fontSize: 30,
     fontWeight: '300',
   },
-  textFeltResult: {
+  error: {
     color: 'black',
-    marginLeft: 30,
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: '400',
   },
-  textWindSpeed: {
-    color: 'black',
-    marginLeft: 30,
-    fontSize: 20,
-    fontWeight: '300',
-    lineHeight: 40,
-  },
-  textWindSpeedResult: {
-    color: 'black',
-    marginLeft: 30,
-    fontSize: 30,
-    fontWeight: '400',
-  },
-  textHumidity: {
-    color: 'black',
-    marginLeft: 30,
-    fontSize: 20,
-    fontWeight: '300',
-    lineHeight: 40,
-  },
-  textHumidityResult: {
-    color: 'black',
-    marginLeft: 30,
-    fontSize: 30,
-    fontWeight: '400',
-  },
-  textRainy: {
-    color: 'black',
-    marginLeft: 190,
-    fontSize: 20,
-    fontWeight: '300',
-    lineHeight: 40,
-    marginTop: -200,
-  },
+ 
 });
