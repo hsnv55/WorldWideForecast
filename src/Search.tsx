@@ -40,22 +40,17 @@ const Search = () => {
         source={require('./wetherBackground.png')}
         style={styles.mainImage}
       >
-          <TouchableOpacity
-            style={styles.buttonBackArrow}
-            onPress={onGetData}
-          >
+
+         {/*/ <Text style = {styles.textSfC}>
+            Search for City
+  </Text>*/}
+          <View style = {styles.searchLine}>
+          <TouchableOpacity onPress={onGetData}>
             <Image
-              source={require('./aserst/img/backArrow.png')}
-              style={styles.imageBackArrow}
+            source = {require('./iconS.png')}
+            style = {styles.iconS}
             />
           </TouchableOpacity>
-          <Text style = {styles.textSfC}>
-            Search for City
-          </Text>
-          <View style = {styles.searchLine}>
-              <Image source = { require('./locationnn.png')}
-              style = {styles.locationButton}
-              />           
           <TextInput
             style={styles.textInput}
             placeholder="Search for City"
@@ -63,8 +58,8 @@ const Search = () => {
             onChangeText={onChangeText}
           />
           </View>
-       
-        <Text style={{ color: 'white', fontSize:40,alignSelf:'center'}}>
+
+        <Text style={{ color: 'white', fontSize:40,alignSelf:'center',top:25,right:25}}>
             {weather.name}, {weather.sys?.country}
           </Text>
         <ImageBackground style = {styles.Rectangle}
@@ -86,13 +81,13 @@ const Search = () => {
              Wind speed
           </Text>
           <Text style={{ color: 'black', fontSize: 35}}>
-             {weather.wind?.speed} m/s
+             {weather.wind?.speed} km/s
           </Text>
           <Text style={{ color: 'black', fontSize: 25}}>
           Precipitation
           </Text>
           <Text style={{ color: 'black', fontSize: 35}}>
-             {weather.weather?.[0]?.main} 
+             {weather.weather?.[0]?.main}
           </Text>
           </View>
         </ImageBackground>
@@ -106,7 +101,7 @@ const Search = () => {
           {weather.cod === '404' && (
             <Text style={{ color: 'white', fontSize: 35 }}>City not found</Text>
           )}
-        </View>
+          </View>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -123,60 +118,29 @@ const styles = StyleSheet.create({
     width: 417,
     height: 1000,
   },
-  imageBackArrow: {
-    width: 26,
-    height: 26,
-    alignSelf:'center'
-  },
-  buttonBackArrow: {
-    backgroundColor: 'silver',
-    width: 35,
-    height: 35,
-    borderRadius: 5,
-    marginTop: 10,
-    marginLeft: 15,
-    justifyContent:'center'
-  },
-  textSfC:{
-    width:330,
-    height:50,
-    textAlign:'center',
-    fontSize:18,
-    color:'black',
-    fontWeight:'600',
-    fontFamily:'Poppins',
-    lineHeight:20,
-    fontStyle:'normal',
-   
-   
-  },
-  locationButton:{
-    width:35,
-    height:35,
-    borderRadius:50,
-   backgroundColor:'silver',
-    opacity:0.7
+ 
 
-  },
   textInput: {
-    width: 335,
+    width: 330,
     height: 38,
     fontSize: 16,
     paddingHorizontal: 10,
     borderRadius: 15,
-    backgroundColor: 'silver',
-    
-    
+    backgroundColor: '#EAEBEE',
+    opacity:0.6,
+    fontWeight:'450'
+
+
+
+
   },
   searchLine:{
     flexDirection:"row-reverse",
-    marginLeft:30,
-    gap:6
+    marginLeft:25,
+    gap:9,
+    marginTop:50
   },
-  weatherIcon: {
-    width: 100,
-    height: 100,
-  },
+
   Rectangle:{
     width:400,
     height:450,
@@ -184,6 +148,11 @@ const styles = StyleSheet.create({
     opacity:0.4,
     borderRadius:10,
     marginLeft:-5,
-    marginTop:60,
+    marginTop:40,
   },
+  iconS:{
+    width:34,
+    height:34
+
+  }
 });
