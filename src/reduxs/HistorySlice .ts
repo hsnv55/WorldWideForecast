@@ -14,8 +14,10 @@ export const HistorySlice = createSlice({
   initialState,
   reducers: {
 
-    addHistoryWeter: (state, action: PayloadAction<number>) => {
-      state.weter= [ ...state.weter ,action.payload]
+    addHistoryWeter: (state, action: PayloadAction<any>) => {
+      console.log("action", action.payload);
+      
+      state.weter = [...state.weter, action.payload]
     },
   },
 })

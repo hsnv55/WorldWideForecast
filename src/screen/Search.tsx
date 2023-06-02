@@ -10,23 +10,28 @@ import {
 } from 'react-native';
 import {useState} from 'react';
 import History from './History';
-
+import { useDispatch } from 'react-redux';
+import { addHistoryWeter } from '../reduxs/HistorySlice ';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const apiKey = 'b1e3a0c6229dabb71a7d0990b34ca2d8';
 const apiUrl = `https://api.openweathermap.org/data/2.5/weather?&appid=${apiKey}&units=metric&q=`;
 
 const Search = () => {
+  const dispatch=useDispatch()
   const [value, setValue] = useState('');
   const [currenWeather, setCurrenWeather] = useState([]);
 
   const getWeather = async () => {
     const urlApi = await fetch(apiUrl + value);
     const data = await urlApi.json();
-    console.log(data);
+    // console.log(data);
     setCurrenWeather(data);
+    dispatch(addHistoryWeter(data))
   };
 
   const onChangeText = (text: string) => {
     setValue(text);
+  
   };
 
   return (

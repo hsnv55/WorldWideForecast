@@ -1,20 +1,38 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {ImageBackground, ImageComponent, StyleSheet, View} from 'react-native';
-import Search from './Search';
-import { Image, Text} from 'react-native-svg';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../reduxs/store';
 
-const History = ({name}) => {
-  console.log(name)
+const History = () => {
+  const wetherhistory = useSelector((state: RootState) => state.history.weter)
   return (
-    
+
     <SafeAreaView style={styles.mainContainer}>
-    
       <ImageBackground
         source={require('../assets/images/historyFon.png')}
         style={styles.mainImage}
-      />
-  {/* <View style={{backgroundColor:'red'}}><Text >{name}</Text></View> */}
+      >
+{wetherhistory?.map(item=>{
+<View style={styles.container}>
+          <View style={styles.resultBackground}>
+            <Text style={styles.cityNameText}>{item?.name}</Text>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={styles.textLeft}>Temperature:</Text>
+              <Text style={styles.textRight}> {item.main?.temp}℃</Text>
+            </View>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={styles.textLeft}>Feels like:</Text>
+              <Text style={styles.textRight}>
+                {item.main?.feels_like}℃
+              </Text>
+            </View>
+          </View>
+
+        </View>
+})}
+        
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -48,5 +66,44 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 20,
     marginLeft: 10,
+  },
+  mainImage1: {
+    flex: 1,
+    // width: 417,
+    // width: '100%',
+    height: 1000,
+  },
+
+  container: {
+    // flex: 1,
+    // opacity: 0.5,
+    // justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 44,
+  },
+  resultBackground: {
+    backgroundColor: 'white',
+    borderRadius: 15,
+    width: 350,
+    height: 200,
+    gap: 30,
+    opacity: 0.8,
+  },
+  cityNameText: {
+    color: 'red',
+    fontSize: 30,
+    fontWeight: '500',
+    textAlign: 'center',
+  },
+
+  textRight: {
+    color: 'black',
+    fontSize: 30,
+    fontWeight: '300',
+  },
+  error: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: '400',
   },
 });

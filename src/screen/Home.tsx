@@ -13,12 +13,28 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Geolocation from '@react-native-community/geolocation';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
+type weather = {
+  name: ReactNode;
+  wind: any;
+  main: any;
+  cod: number;
+  base: string;
+  clouds: {
+    all: number;
+  };
+  weather: Array<{
+    description: string;
+    icon: string;
+    id: number;
+    main: string;
+  }>;
+};
 const Home = () => {
   const navigation = useNavigation();
   const handleFiveDays = () => {
-    navigation.navigate('ForecastScreen',)
+    navigation.navigate('ForecastScreen');
   };
   const [currenDayWeather, setCurrenDayWeather] = useState([]);
   useEffect(() => {
@@ -33,7 +49,7 @@ const Home = () => {
     );
     const data = await response.json();
     setCurrenDayWeather(data);
-    console.log(data);
+    // console.log(data);
   };
 
   return (
@@ -44,22 +60,82 @@ const Home = () => {
             uri: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9UjvVt9mzQM8eWqYXfsLHBsUJXIKhQdh86mcJUNdi_PzL7YtOi6Irm8IqQyWhMnqxXvhGH1DmFFyyuF6zww6Td6VMkbe07Lpv-IwfE1tKp0UhL5J_KozpFwenxAf3mANsFi8zb1UBcKg3lfEcVw77Hf5lMSSGOXlia1yWHzl2IrDdnCHUkJckA4ip3A/s960/Anime%20sky%20landscape%20live%20wallpaper.gif',
           }}
           style={styles.image}>
-          <Image
-            source={require('../assets/icons/iconCloudy.png')}
-            style={styles.iconImage}
-          />
+            {/* <View style={styles.container}> */}
+              {(currenDayWeather?.weather?.[0].main == 'Clear' && (
+                <View>
+                  <ImageBackground
+                    style={styles.resultImage}
+                    source={require('../assets/icons/iconCloudy.png')}
+                    // source={{
+                    //   uri: 'https://i.pinimg.com/originals/43/e1/7a/43e17aa3c2ba523273401a7f7a130a8c.gif',
+                    // }}
+                  />
+                  {/* <Text style={styles.textWeather}>
+                    {currenWeather?.weather?.[0].main}
+                  </Text> */}
+                </View>
+              )) ||
+                (currenDayWeather?.weather?.[0].main == 'Rainy' && (
+                  <View>
+                    <ImageBackground
+                      style={styles.resultImage}
+                      source={require('../assets/icons/rainyIcon.png')}
+                    />
+                  </View>
+                )) ||
+                (currenDayWeather?.weather?.[0].main == 'Clouds' && (
+                  <View>
+                    <ImageBackground
+                      style={styles.resultImage}
+                      source={require('../assets/icons/cloudyIcon.png')}
+                    />
+                  </View>
+                )) ||
+                (currenDayWeather?.weather?.[0].main == 'Sunny' && (
+                  <View>
+                    <ImageBackground
+                      style={styles.resultImage}
+                      source={require('../assets/icons/sunnyIcon.png')}
+                    />
+                  </View>
+                )) ||
+                (currenDayWeather?.weather?.[0].main == 'Storm' && (
+                  <View>
+                    <ImageBackground
+                      style={styles.resultImage}
+                      source={require('../assets/icons/stormIcon.png')}
+                    />
+                  </View>
+                )) ||
+                (currenDayWeather?.weather?.[0].main == 'Snow' && (
+                  <View>
+                    <ImageBackground
+                      style={styles.resultImage}
+                      source={require('../assets/icons/snowIcon.png')}
+                    />
+                  </View>
+                )) ||
+                (currenDayWeather?.weather?.[0].main == 'Thunder' && (
+                  <View>
+                    <ImageBackground
+                      style={styles.resultImage}
+                      source={require('../assets/icons/thunderIcon.png')}
+                    />
+                  </View>
+                  
+                ))}
             <View style={styles.container}>
             <View style={styles.resultBackground}>
             <Text style={styles.cityNameText}>{currenDayWeather.name}</Text>
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.textLeft}>Temperature:</Text>
-              <Text style={styles.textRight}> {currenDayWeather.main?.temp}C</Text>
+              <Text style={styles.textRight}> {Math.round(currenDayWeather.main?.temp-273.15)}℃</Text>
               {/* temp={Math.round(temp)} */}
             </View>
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.textLeft}>Feels like:</Text>
               <Text style={styles.textRight}>
-                {currenDayWeather.main?.feels_like}C
+              { Math.round (currenDayWeather.main?.feels_like-273.15)}℃
               </Text>
             </View>
             <View style={{flexDirection: 'row'}}>
@@ -158,6 +234,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 90,
     marginRight:25
+  },
+  resultBackground: {
+    backgroundColor: 'white',
+    borderRadius: 15,
+    width: 350,
+    height: 500,
+    opacity: 0.8,
+  }, 
+  resultImage: {
+    // width: 1000,
+    // height: 1000,
+    width: 200,
+    height: 150,
+    // alignItems: 'center',
+    marginLeft: 100,
   },
   resultBackground: {
     backgroundColor: 'white',

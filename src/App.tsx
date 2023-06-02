@@ -13,7 +13,9 @@ import HomeSvg from './svg/homeSvg.svg';
 import SearchSvg from './svg/searchSvg.svg';
 import HistorySvg from './svg/historySvg.svg';
 import { Provider } from 'react-redux';
-import { store } from './reduxs/store';
+import { persistore, store } from './reduxs/store';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -72,6 +74,8 @@ const App = () => {
   }, []);
   return (
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistore}>
+      <SafeAreaProvider>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{header: () => null}}
@@ -88,6 +92,8 @@ const App = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </SafeAreaProvider>
+    </PersistGate>
     </Provider>
   );
 };
