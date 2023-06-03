@@ -4,6 +4,7 @@
 import {
   ImageBackground,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -60,105 +61,111 @@ const Search = () => {
           onChangeText={onChangeText}
           onEndEditing={getWeather}
         />
-        {!currenWeather ||
-          (currenWeather?.cod == 404 && (
-            <View
-              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-              <View style={styles.errorContainer}>
-                <Text style={styles.error}>{'Sorry city not found :('}</Text>
-              </View>
-            </View>
-          )) || (
-            <View style={styles.container}>
-              {(currenWeather?.weather?.[0].main == 'Clear' && (
-                <View>
-                  <ImageBackground
-                    style={styles.resultImage}
-                    source={require('../../assets/icons/iconCloudy.png')}
-                  />
+        <ScrollView contentContainerStyle={{paddingVertical: 20}}>
+          {!currenWeather ||
+            (currenWeather?.cod == 404 && (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <View style={styles.errorContainer}>
+                  <Text style={styles.error}>{'Sorry city not found :('}</Text>
                 </View>
-              )) ||
-                (currenWeather?.weather?.[0].main == 'Rainy' && (
+              </View>
+            )) || (
+              <View style={styles.container}>
+                {(currenWeather?.weather?.[0].main == 'Clear' && (
                   <View>
                     <ImageBackground
                       style={styles.resultImage}
-                      source={require('../../assets/images/rainyImage.png')}
+                      source={require('../../assets/icons/iconCloudy.png')}
                     />
                   </View>
                 )) ||
-                (currenWeather?.weather?.[0].main == 'Clouds' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/cloudyImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.weather?.[0].main == 'Sunny' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/sunnyImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.weather?.[0].main == 'Storm' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/stormImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.weather?.[0].main == 'Snow' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/snowImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.weather?.[0].main == 'Thunder' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/thunderImage.png')}
-                    />
-                  </View>
-                ))}
-              <Text style={styles.cityNameText}>{currenWeather?.name}</Text>
-              <View style={styles.characteristicsContainer}>
-                <Text style={styles.textLeft}>Temperature:</Text>
-                <Text style={styles.textRight}>
-                  {Math.round(currenWeather?.main?.temp)} ℃
-                </Text>
+                  (currenWeather?.weather?.[0].main == 'Rainy' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/rainyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.weather?.[0].main == 'Clouds' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/cloudyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.weather?.[0].main == 'Sunny' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/sunnyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.weather?.[0].main == 'Storm' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/stormImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.weather?.[0].main == 'Snow' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/snowImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.weather?.[0].main == 'Thunder' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/thunderImage.png')}
+                      />
+                    </View>
+                  ))}
+                <Text style={styles.cityNameText}>{currenWeather?.name}</Text>
+                <View style={styles.characteristicsContainer}>
+                  <Text style={styles.textLeft}>Temperature:</Text>
+                  <Text style={styles.textRight}>
+                    {Math.round(currenWeather?.main?.temp)} ℃
+                  </Text>
+                </View>
+                <View style={styles.characteristicsContainer}>
+                  <Text style={styles.textLeft}>Feels like:</Text>
+                  <Text style={styles.textRight}>
+                    {Math.round(currenWeather?.main?.feels_like)} ℃
+                  </Text>
+                </View>
+                <View style={styles.characteristicsContainer}>
+                  <Text style={styles.textLeft}>Humidity:</Text>
+                  <Text style={styles.textRight}>
+                    {currenWeather?.main?.humidity} %
+                  </Text>
+                </View>
+                <View style={styles.characteristicsContainer}>
+                  <Text style={styles.textLeft}>Wind speed:</Text>
+                  <Text style={styles.textRight}>
+                    {currenWeather?.wind?.speed} km/h
+                  </Text>
+                </View>
+                <View style={styles.characteristicsContainer}>
+                  <Text style={styles.textLeft}>Pressure:</Text>
+                  <Text style={styles.textRight}>
+                    {currenWeather?.main?.pressure}
+                  </Text>
+                </View>
               </View>
-              <View style={styles.characteristicsContainer}>
-                <Text style={styles.textLeft}>Feels like:</Text>
-                <Text style={styles.textRight}>
-                  {Math.round(currenWeather?.main?.feels_like)} ℃
-                </Text>
-              </View>
-              <View style={styles.characteristicsContainer}>
-                <Text style={styles.textLeft}>Humidity:</Text>
-                <Text style={styles.textRight}>
-                  {currenWeather?.main?.humidity} %
-                </Text>
-              </View>
-              <View style={styles.characteristicsContainer}>
-                <Text style={styles.textLeft}>Wind speed:</Text>
-                <Text style={styles.textRight}>
-                  {currenWeather?.wind?.speed} km/h
-                </Text>
-              </View>
-              <View style={styles.characteristicsContainer}>
-                <Text style={styles.textLeft}>Pressure:</Text>
-                <Text style={styles.textRight}>
-                  {currenWeather?.main?.pressure}
-                </Text>
-              </View>
-            </View>
-          )}
+            )}
+        </ScrollView>
       </ImageBackground>
     </SafeAreaView>
   );

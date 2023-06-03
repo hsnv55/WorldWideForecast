@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Text,
   View,
+  ScrollView,
 } from 'react-native';
 import Wwe from '../../navigation/nav';
 import Geolocation from '@react-native-community/geolocation';
@@ -49,6 +50,7 @@ const ForecastFiveDays = () => {
       `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b1e3a0c6229dabb71a7d0990b34ca2d8`,
     );
     const data = await response.json();
+    console.log(JSON.stringify(data));
     setCurrenWeather(data);
   };
 
@@ -61,356 +63,352 @@ const ForecastFiveDays = () => {
         style={styles.mainImage}>
         <View style={{flexDirection: 'row'}}>
           <Wwe />
-          {/* <TouchableOpacity onPress={handleBack}>
-            <Image
-              source={require('../assets/icons/backArrowIcon.png')}
-              style={styles.imageBackArrow}
-            /> */}
-          {/* </TouchableOpacity> */}
           <Text style={styles.fiveDays}>5 Days</Text>
         </View>
-        {/* 0 */}
-        <View style={styles.container}>
-          <View style={{flexDirection: 'column'}}>
-            <Text style={styles.dayText}>Today</Text>
-            <View style={styles.characteristicsContainer}>
-              <Text style={styles.textLeft}>Temperature:</Text>
-              <Text style={styles.textRight}>
-                {Math.round(currenWeather?.list?.[0]?.main?.temp - 273.15)} ℃
-              </Text>
-              {/* </View> */}
-              {/* </View> */}
-              {(currenWeather?.list?.[0]?.weather?.[0].main == 'Clear' && (
-                <View>
-                  <ImageBackground
-                    style={styles.resultImage}
-                    source={require('../../assets/icons/iconCloudy.png')}
-                  />
-                </View>
-              )) ||
-                (currenWeather?.list?.[0]?.weather?.[0].main == 'Rainy' && (
+        <ScrollView contentContainerStyle={{paddingVertical: 20}}>
+          {/* 0 */}
+          <View style={styles.container}>
+            <View style={{flexDirection: 'column'}}>
+              <Text style={styles.dayText}>Today</Text>
+              <View style={styles.characteristicsContainer}>
+                <Text style={styles.textLeft}>Temperature:</Text>
+                <Text style={styles.textRight}>
+                  {Math.round(currenWeather?.list?.[0]?.main?.temp - 273.15)} ℃
+                </Text>
+                {/* </View> */}
+                {/* </View> */}
+                {(currenWeather?.list?.[0]?.weather?.[0].main == 'Clear' && (
                   <View>
                     <ImageBackground
                       style={styles.resultImage}
-                      source={require('../../assets/images/rainyImage.png')}
+                      source={require('../../assets/icons/iconCloudy.png')}
                     />
                   </View>
                 )) ||
-                (currenWeather?.list?.[0]?.weather?.[0].main == 'Clouds' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/cloudyImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[0]?.weather?.[0].main == 'Sunny' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/sunnyImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[0]?.weather?.[0].main == 'Storm' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/stormImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[0]?.weather?.[0].main == 'Snow' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/snowImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[0]?.weather?.[0].main == 'Thunder' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/thunderImage.png')}
-                    />
-                  </View>
-                ))}
+                  (currenWeather?.list?.[0]?.weather?.[0].main == 'Rainy' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/rainyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[0]?.weather?.[0].main == 'Clouds' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/cloudyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[0]?.weather?.[0].main == 'Sunny' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/sunnyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[0]?.weather?.[0].main == 'Storm' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/stormImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[0]?.weather?.[0].main == 'Snow' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/snowImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[0]?.weather?.[0].main == 'Thunder' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/thunderImage.png')}
+                      />
+                    </View>
+                  ))}
+              </View>
             </View>
           </View>
-        </View>
-        {/* 1 */}
-        <View style={styles.container}>
-          <View style={{flexDirection: 'column'}}>
-            <Text style={styles.dayText}>Tomorrow</Text>
-            <View style={styles.characteristicsContainer}>
-              <Text style={styles.textLeft}>Temperature:</Text>
-              <Text style={styles.textRight}>
-                {Math.round(currenWeather?.list?.[1]?.main?.temp - 273.15)} ℃
-              </Text>
-              {(currenWeather?.list?.[1]?.weather?.[0].main == 'Clear' && (
-                <View>
-                  <ImageBackground
-                    style={styles.resultImage}
-                    source={require('../../assets/icons/iconCloudy.png')}
-                  />
-                </View>
-              )) ||
-                (currenWeather?.list?.[1]?.weather?.[0].main == 'Rainy' && (
+          {/* 1 */}
+          <View style={styles.container}>
+            <View style={{flexDirection: 'column'}}>
+              <Text style={styles.dayText}>Tomorrow</Text>
+              <View style={styles.characteristicsContainer}>
+                <Text style={styles.textLeft}>Temperature:</Text>
+                <Text style={styles.textRight}>
+                  {Math.round(currenWeather?.list?.[1]?.main?.temp - 273.15)} ℃
+                </Text>
+                {(currenWeather?.list?.[1]?.weather?.[0].main == 'Clear' && (
                   <View>
                     <ImageBackground
                       style={styles.resultImage}
-                      source={require('../../assets/images/rainyImage.png')}
+                      source={require('../../assets/icons/iconCloudy.png')}
                     />
                   </View>
                 )) ||
-                (currenWeather?.list?.[1]?.weather?.[0].main == 'Clouds' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/cloudyImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[1]?.weather?.[0].main == 'Sunny' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/sunnyImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[1]?.weather?.[0].main == 'Storm' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/stormImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[1]?.weather?.[0].main == 'Snow' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/snowImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[1]?.weather?.[0].main == 'Thunder' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/thunderImage.png')}
-                    />
-                  </View>
-                ))}
+                  (currenWeather?.list?.[1]?.weather?.[0].main == 'Rainy' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/rainyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[1]?.weather?.[0].main == 'Clouds' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/cloudyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[1]?.weather?.[0].main == 'Sunny' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/sunnyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[1]?.weather?.[0].main == 'Storm' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/stormImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[1]?.weather?.[0].main == 'Snow' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/snowImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[1]?.weather?.[0].main == 'Thunder' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/thunderImage.png')}
+                      />
+                    </View>
+                  ))}
+              </View>
             </View>
           </View>
-        </View>
-        {/* 2 */}
-        <View style={styles.container}>
-          <View style={{flexDirection: 'column'}}>
-            <Text style={styles.dayText}>Sunday</Text>
-            <View style={styles.characteristicsContainer}>
-              <Text style={styles.textLeft}>Temperature:</Text>
-              <Text style={styles.textRight}>
-                {Math.round(currenWeather?.list?.[2]?.main?.temp - 273.15)} ℃
-              </Text>
-              {(currenWeather?.list?.[2]?.weather?.[0].main == 'Clear' && (
-                <View>
-                  <ImageBackground
-                    style={styles.resultImage}
-                    source={require('../../assets/icons/iconCloudy.png')}
-                  />
-                </View>
-              )) ||
-                (currenWeather?.list?.[2]?.weather?.[0].main == 'Rainy' && (
+          {/* 2 */}
+          <View style={styles.container}>
+            <View style={{flexDirection: 'column'}}>
+              <Text style={styles.dayText}>Sunday</Text>
+              <View style={styles.characteristicsContainer}>
+                <Text style={styles.textLeft}>Temperature:</Text>
+                <Text style={styles.textRight}>
+                  {Math.round(currenWeather?.list?.[2]?.main?.temp - 273.15)} ℃
+                </Text>
+                {(currenWeather?.list?.[2]?.weather?.[0].main == 'Clear' && (
                   <View>
                     <ImageBackground
                       style={styles.resultImage}
-                      source={require('../../assets/images/rainyImage.png')}
+                      source={require('../../assets/icons/iconCloudy.png')}
                     />
                   </View>
                 )) ||
-                (currenWeather?.list?.[2]?.weather?.[0].main == 'Clouds' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/cloudyImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[2]?.weather?.[0].main == 'Sunny' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/sunnyImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[2]?.weather?.[0].main == 'Storm' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/stormImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[2]?.weather?.[0].main == 'Snow' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/snowImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[2]?.weather?.[0].main == 'Thunder' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/thunderImage.png')}
-                    />
-                  </View>
-                ))}
+                  (currenWeather?.list?.[2]?.weather?.[0].main == 'Rainy' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/rainyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[2]?.weather?.[0].main == 'Clouds' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/cloudyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[2]?.weather?.[0].main == 'Sunny' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/sunnyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[2]?.weather?.[0].main == 'Storm' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/stormImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[2]?.weather?.[0].main == 'Snow' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/snowImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[2]?.weather?.[0].main == 'Thunder' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/thunderImage.png')}
+                      />
+                    </View>
+                  ))}
+              </View>
             </View>
           </View>
-        </View>
-        {/* 3 */}
-        <View style={styles.container}>
-          <View style={{flexDirection: 'column'}}>
-            <Text style={styles.dayText}>Monday</Text>
-            <View style={styles.characteristicsContainer}>
-              <Text style={styles.textLeft}>Temperature:</Text>
-              <Text style={styles.textRight}>
-                {Math.round(currenWeather?.list?.[3]?.main?.temp - 273.15)} ℃
-              </Text>
-              {(currenWeather?.list?.[3]?.weather?.[0].main == 'Clear' && (
-                <View>
-                  <ImageBackground
-                    style={styles.resultImage}
-                    source={require('../../assets/icons/iconCloudy.png')}
-                  />
-                </View>
-              )) ||
-                (currenWeather?.list?.[3]?.weather?.[0].main == 'Rainy' && (
+          {/* 3 */}
+          <View style={styles.container}>
+            <View style={{flexDirection: 'column'}}>
+              <Text style={styles.dayText}>Monday</Text>
+              <View style={styles.characteristicsContainer}>
+                <Text style={styles.textLeft}>Temperature:</Text>
+                <Text style={styles.textRight}>
+                  {Math.round(currenWeather?.list?.[3]?.main?.temp - 273.15)} ℃
+                </Text>
+                {(currenWeather?.list?.[3]?.weather?.[0].main == 'Clear' && (
                   <View>
                     <ImageBackground
                       style={styles.resultImage}
-                      source={require('../../assets/images/rainyImage.png')}
+                      source={require('../../assets/icons/iconCloudy.png')}
                     />
                   </View>
                 )) ||
-                (currenWeather?.list?.[3]?.weather?.[0].main == 'Clouds' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/cloudyImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[3]?.weather?.[0].main == 'Sunny' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/sunnyImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[3]?.weather?.[0].main == 'Storm' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/stormImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[3]?.weather?.[0].main == 'Snow' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/snowImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[3]?.weather?.[0].main == 'Thunder' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/thunderImage.png')}
-                    />
-                  </View>
-                ))}
+                  (currenWeather?.list?.[3]?.weather?.[0].main == 'Rainy' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/rainyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[3]?.weather?.[0].main == 'Clouds' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/cloudyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[3]?.weather?.[0].main == 'Sunny' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/sunnyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[3]?.weather?.[0].main == 'Storm' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/stormImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[3]?.weather?.[0].main == 'Snow' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/snowImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[3]?.weather?.[0].main == 'Thunder' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/thunderImage.png')}
+                      />
+                    </View>
+                  ))}
+              </View>
             </View>
           </View>
-        </View>
-        {/* 4 */}
-        <View style={styles.container}>
-          <View style={{flexDirection: 'column'}}>
-            <Text style={styles.dayText}>Tuesday</Text>
-            <View style={styles.characteristicsContainer}>
-              <Text style={styles.textLeft}>Temperature:</Text>
-              <Text style={styles.textRight}>
-                {Math.round(currenWeather?.list?.[4]?.main?.temp - 273.15)} ℃
-              </Text>
-              {(currenWeather?.list?.[4]?.weather?.[0].main == 'Clear' && (
-                <View>
-                  <ImageBackground
-                    style={styles.resultImage}
-                    source={require('../../assets/icons/iconCloudy.png')}
-                  />
-                </View>
-              )) ||
-                (currenWeather?.list?.[4]?.weather?.[0].main == 'Rainy' && (
+          {/* 4 */}
+          <View style={styles.container}>
+            <View style={{flexDirection: 'column'}}>
+              <Text style={styles.dayText}>Tuesday</Text>
+              <View style={styles.characteristicsContainer}>
+                <Text style={styles.textLeft}>Temperature:</Text>
+                <Text style={styles.textRight}>
+                  {Math.round(currenWeather?.list?.[4]?.main?.temp - 273.15)} ℃
+                </Text>
+                {(currenWeather?.list?.[4]?.weather?.[0].main == 'Clear' && (
                   <View>
                     <ImageBackground
                       style={styles.resultImage}
-                      source={require('../../assets/images/rainyImage.png')}
+                      source={require('../../assets/icons/iconCloudy.png')}
                     />
                   </View>
                 )) ||
-                (currenWeather?.list?.[4]?.weather?.[0].main == 'Clouds' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/cloudyImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[4]?.weather?.[0].main == 'Sunny' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/sunnyImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[4]?.weather?.[0].main == 'Storm' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/stormImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[4]?.weather?.[0].main == 'Snow' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/snowImage.png')}
-                    />
-                  </View>
-                )) ||
-                (currenWeather?.list?.[4]?.weather?.[0].main == 'Thunder' && (
-                  <View>
-                    <ImageBackground
-                      style={styles.resultImage}
-                      source={require('../../assets/images/thunderImage.png')}
-                    />
-                  </View>
-                ))}
+                  (currenWeather?.list?.[4]?.weather?.[0].main == 'Rainy' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/rainyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[4]?.weather?.[0].main == 'Clouds' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/cloudyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[4]?.weather?.[0].main == 'Sunny' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/sunnyImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[4]?.weather?.[0].main == 'Storm' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/stormImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[4]?.weather?.[0].main == 'Snow' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/snowImage.png')}
+                      />
+                    </View>
+                  )) ||
+                  (currenWeather?.list?.[4]?.weather?.[0].main == 'Thunder' && (
+                    <View>
+                      <ImageBackground
+                        style={styles.resultImage}
+                        source={require('../../assets/images/thunderImage.png')}
+                      />
+                    </View>
+                  ))}
+              </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
       </ImageBackground>
     </SafeAreaView>
   );

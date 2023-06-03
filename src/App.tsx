@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
-import React from 'react';
+import React, {startTransition, useEffect} from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -11,7 +12,10 @@ import HistoryScreen from './screen/HistoryScreen/History';
 import HomeSvg from './svg/homeSvg.svg';
 import SearchSvg from './svg/searchSvg.svg';
 import HistorySvg from './svg/historySvg.svg';
+import {Provider} from 'react-redux';
+import {persistore, store} from './reduxs/store';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -65,25 +69,32 @@ const TabNavigator = () => (
 );
 
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{header: () => null}}
-          initialRouteName="Home">
-          <Stack.Screen
-            name="HomeScreen"
-            component={TabNavigator}
-            options={{header: () => null}}
-          />
-          <Stack.Screen
-            name="ForecastScreen"
-            component={ForecastFiveDays}
-            options={{header: () => null}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistore}>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{header: () => null}}
+              initialRouteName="Home">
+              <Stack.Screen
+                name="HomeScreen"
+                component={TabNavigator}
+                options={{header: () => null}}
+              />
+              <Stack.Screen
+                name="ForecastScreen"
+                component={ForecastFiveDays}
+                options={{header: () => null}}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </PersistGate>
+    </Provider>
   );
 };
 
