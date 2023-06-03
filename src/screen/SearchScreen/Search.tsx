@@ -11,6 +11,8 @@ import {
   View,
 } from 'react-native';
 import {ReactNode, useState} from 'react';
+import {addHistoryWeter} from '../../reduxs/HistorySlice ';
+import {useDispatch} from 'react-redux';
 
 const apiKey = 'b1e3a0c6229dabb71a7d0990b34ca2d8';
 const apiUrl = `https://api.openweathermap.org/data/2.5/weather?&appid=${apiKey}&units=metric&q=`;
@@ -32,15 +34,15 @@ type Weather = {
   }>;
 };
 const Search = () => {
+  const dispatch = useDispatch();
   const [value, setValue] = useState('');
   const [currenWeather, setCurrenWeather] = useState<Weather>();
 
   const getWeather = async () => {
     const urlApi = await fetch(apiUrl + value);
     const data = await urlApi.json();
-    console.log(data);
     setCurrenWeather(data);
-    console.log(data);
+    dispatch(addHistoryWeter(data));
   };
 
   const onChangeText = (text: string) => {
