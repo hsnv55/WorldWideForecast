@@ -1,66 +1,81 @@
-import React, {useEffect, useState} from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/no-unstable-nested-components */
+import React, { startTransition, useEffect } from 'react';
+import SplashScreen from 'react-native-splash-screen'
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from './Home';
-import ForecastFiveDays from './ForecastFiveDays';
-import Search from './Search';
-import {Image} from 'react-native';
-// import Svg, {Circle} from 'react-native-svg';
-import Icon from './aserst/icon/search';
-import HomeIcon from './aserst/icon/home';
-import {ScrollView} from 'react-native-gesture-handler';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import Geolocation from '@react-native-community/geolocation';
+import Home from './screen/Home';
+import ForecastFiveDays from './screen/ForecastFiveDays';
+import Search from './screen/Search';
+import HistoryScreen from './screen/History';
+import HomeSvg from './svg/homeSvg.svg';
+import SearchSvg from './svg/searchSvg.svg';
+import HistorySvg from './svg/historySvg.svg';
+import { Provider } from 'react-redux';
+import { persistore, store } from './reduxs/store';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-// const Svg = Circle();
 
-const TabNavigator = () => {
-  useEffect(() => {
-    Geolocation.getCurrentPosition(info => {
-      request(info.coords.latitude, info.coords.longitude);
-    });
-  }, []);
-
-  const request = async (lat: number, lon: number) => {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=b1e3a0c6229dabb71a7d0990b34ca2d8`,
-    );
-    const data = await response.json();
-    console.log(data);
-  };
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        options={{
-          tabBarStyle: {
-            backgroundColor: '#AEB8DB',
-          },
-          header: () => null,
-          tabBarIcon: ({focused, color}) => <HomeIcon />,
-        }}
-        name="Home"
-        component={Home}
-      />
-      <Tab.Screen
-        options={{
-          tabBarStyle: {
-            backgroundColor: '#A9ADBA',
-          },
-          header: () => null,
-          tabBarIcon: ({focused, color}) => <Icon />,
-        }}
-        name="Search"
-        component={Search}
-      />
-    </Tab.Navigator>
-  );
-};
+const TabNavigator = () => (
+  <Tab.Navigator
+    screenOptions={{
+      tabBarActiveBackgroundColor: '#A9ADBA',
+      tabBarShowLabel: false,
+      tabBarBackground: () => {
+        return false;
+      },
+    }}>
+    <Tab.Screen
+      options={{
+        tabBarStyle: {
+          backgroundColor: 'silver',
+          opacity: 0.8,
+        },
+        header: () => null,
+        tabBarIcon: ({focused, color}) => <HomeSvg />,
+      }}
+      name="Home"
+      component={Home}
+    />
+    <Tab.Screen
+      options={{
+        tabBarStyle: {
+          backgroundColor: 'silver',
+          opacity: 0.8,
+        },
+        header: () => null,
+        tabBarIcon: ({focused, color}) => <SearchSvg />,
+      }}
+      name="Search"
+      component={Search}
+    />
+    <Tab.Screen
+      options={{
+        tabBarStyle: {
+          backgroundColor: 'silver',
+          opacity: 0.8,
+        },
+        header: () => null,
+        tabBarIcon: ({focused, color}) => <HistorySvg />,
+      }}
+      name="History"
+      component={HistoryScreen}
+    />
+  </Tab.Navigator>
+);
 
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistore}>
+      <SafeAreaProvider>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{header: () => null}}
@@ -77,17 +92,10 @@ const App = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </SafeAreaProvider>
+    </PersistGate>
+    </Provider>
   );
 };
 
 export default App;
-
-// Проблемы с Макетом:
-// 1. Нужно в buttonTab добавить иконки и убрать белый цвет
-// 2. В Search нужно добавить иконку поиска и сделать так чтобы текс находился по центру
-
-//  Логика программы:
-// 1. Когда хотим узнать программу на 5дн нужно чтобы выходила реальная инфа
-// 2. Нужно чтобы на главном экране находилось реальная инфа
-// 3. В Search нужно чтобы при вводе городов выходила реальная инфа
-// 4. В Search при нажатие на Enter нужно чтобы нас перекинуло на новый +экран
