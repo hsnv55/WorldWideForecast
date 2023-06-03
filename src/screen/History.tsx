@@ -1,37 +1,45 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
-import { RootState } from '../reduxs/store';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import {useSelector} from 'react-redux';
+import {RootState} from '../reduxs/store';
 
 const History = () => {
-  const wetherhistory = useSelector((state: RootState) => state.history.weter)
-  return (
+  const {weter} = useSelector((state: RootState) => state.history);
 
+  console.log(weter);
+  return (
     <SafeAreaView style={styles.mainContainer}>
       <ImageBackground
         source={require('../assets/images/historyFon.png')}
-        style={styles.mainImage}
-      >
-{wetherhistory?.map(item=>{
-<View style={styles.container}>
-          <View style={styles.resultBackground}>
-            <Text style={styles.cityNameText}>{item?.name}</Text>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.textLeft}>Temperature:</Text>
-              <Text style={styles.textRight}> {item.main?.temp}℃</Text>
-            </View>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.textLeft}>Feels like:</Text>
-              <Text style={styles.textRight}>
-                {item.main?.feels_like}℃
-              </Text>
-            </View>
-          </View>
-
-        </View>
-})}
-        
+        style={styles.mainImage}>
+        <ScrollView contentContainerStyle={{paddingVertical: 20}}>
+          {weter?.map((item, index) => {
+            return (
+              <View key={index} style={styles.container}>
+                <View style={styles.resultBackground}>
+                  <Text style={styles.cityNameText}>{item?.name}</Text>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text style={styles.textLeft}>Temperature:</Text>
+                    <Text style={styles.textRight}> {item.main?.temp}℃</Text>
+                  </View>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text style={styles.textLeft}>Feels like:</Text>
+                    <Text style={styles.textRight}>
+                      {item.main?.feels_like}℃
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            );
+          })}
+        </ScrollView>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -90,7 +98,7 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
   cityNameText: {
-    color: 'red',
+    color: 'black',
     fontSize: 30,
     fontWeight: '500',
     textAlign: 'center',

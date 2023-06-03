@@ -1,28 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit';
+import type {PayloadAction} from '@reduxjs/toolkit';
 
 export interface CounterState {
-  weter: any[]
+  weter: any[];
 }
 
 const initialState: CounterState = {
   weter: [],
-}
+};
 
 export const HistorySlice = createSlice({
   name: 'history',
   initialState,
   reducers: {
-
     addHistoryWeter: (state, action: PayloadAction<any>) => {
-      console.log("action", action.payload);
-      
-      state.weter = [...state.weter, action.payload]
+      state.weter = [...state.weter, action.payload];
     },
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { addHistoryWeter } = HistorySlice.actions
+export const {addHistoryWeter} = HistorySlice.actions;
 
-export default HistorySlice.reducer
+export default HistorySlice.reducer;

@@ -10,14 +10,14 @@ import {
 } from 'react-native';
 import {useState} from 'react';
 import History from './History';
-import { useDispatch } from 'react-redux';
-import { addHistoryWeter } from '../reduxs/HistorySlice ';
+import {useDispatch} from 'react-redux';
+import {addHistoryWeter} from '../reduxs/HistorySlice ';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const apiKey = 'b1e3a0c6229dabb71a7d0990b34ca2d8';
 const apiUrl = `https://api.openweathermap.org/data/2.5/weather?&appid=${apiKey}&units=metric&q=`;
 
 const Search = () => {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const [value, setValue] = useState('');
   const [currenWeather, setCurrenWeather] = useState([]);
 
@@ -26,12 +26,11 @@ const Search = () => {
     const data = await urlApi.json();
     // console.log(data);
     setCurrenWeather(data);
-    dispatch(addHistoryWeter(data))
+    dispatch(addHistoryWeter(data));
   };
 
   const onChangeText = (text: string) => {
     setValue(text);
-  
   };
 
   return (
@@ -82,15 +81,14 @@ const Search = () => {
               <Text style={styles.textLeft}>Weather:</Text>
               <Text style={styles.textRight}> {currenWeather.weather[0].main}</Text>
             </View> */}
-           
           </View>
           <View style={{alignItems: 'center'}}>
-              {currenWeather.cod === 404 && (
-                <Text style={styles.error}>{'Sorry city not found :('}</Text>
-              )}
-            </View>
+            {currenWeather.cod === 404 && (
+              <Text style={styles.error}>{'Sorry city not found :('}</Text>
+            )}
+          </View>
         </View>
-{/* <History  name={value}/> */}
+        {/* <History  name={value}/> */}
       </ImageBackground>
     </SafeAreaView>
   );
