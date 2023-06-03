@@ -51,7 +51,7 @@ const Search = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ImageBackground
-        source={require('../../assets/images/searchFon.png')}
+        source={require('../../assets/gifs/searchFon.gif')}
         style={styles.mainImage}>
         <TextInput
           style={styles.input}
@@ -75,13 +75,7 @@ const Search = () => {
                   <ImageBackground
                     style={styles.resultImage}
                     source={require('../../assets/icons/iconCloudy.png')}
-                    // source={{
-                    //   uri: 'https://i.pinimg.com/originals/43/e1/7a/43e17aa3c2ba523273401a7f7a130a8c.gif',
-                    // }}
                   />
-                  {/* <Text style={styles.textWeather}>
-                    {currenWeather?.weather?.[0].main}
-                  </Text> */}
                 </View>
               )) ||
                 (currenWeather?.weather?.[0].main == 'Rainy' && (
@@ -136,26 +130,25 @@ const Search = () => {
               <View style={styles.characteristicsContainer}>
                 <Text style={styles.textLeft}>Temperature:</Text>
                 <Text style={styles.textRight}>
-                  {currenWeather?.main?.temp}C
+                  {Math.round(currenWeather?.main?.temp)} ℃
                 </Text>
-                {/* temp={Math.round(temp)} */}
               </View>
               <View style={styles.characteristicsContainer}>
                 <Text style={styles.textLeft}>Feels like:</Text>
                 <Text style={styles.textRight}>
-                  {currenWeather?.main?.feels_like}C
+                  {Math.round(currenWeather?.main?.feels_like)} ℃
                 </Text>
               </View>
               <View style={styles.characteristicsContainer}>
                 <Text style={styles.textLeft}>Humidity:</Text>
                 <Text style={styles.textRight}>
-                  {currenWeather?.main?.humidity}%
+                  {currenWeather?.main?.humidity} %
                 </Text>
               </View>
               <View style={styles.characteristicsContainer}>
                 <Text style={styles.textLeft}>Wind speed:</Text>
                 <Text style={styles.textRight}>
-                  {currenWeather?.wind?.speed}km/h
+                  {currenWeather?.wind?.speed} km/h
                 </Text>
               </View>
               <View style={styles.characteristicsContainer}>
@@ -238,7 +231,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    opacity: 0.7,
+    // opacity: 0.7,
     width: 320,
     height: 60,
     gap: 15,
@@ -246,8 +239,8 @@ const styles = StyleSheet.create({
   resultImage: {
     // width: 1000,
     // height: 1000,
-    width: 200,
-    height: 150,
+    width: 220,
+    height: 190,
   },
   textWeather: {
     color: 'black',

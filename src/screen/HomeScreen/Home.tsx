@@ -1,7 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react-native/no-inline-styles */
 import {
-  Image,
   ImageBackground,
   SafeAreaView,
   ScrollView,
@@ -26,7 +24,7 @@ const Home = () => {
             uri: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9UjvVt9mzQM8eWqYXfsLHBsUJXIKhQdh86mcJUNdi_PzL7YtOi6Irm8IqQyWhMnqxXvhGH1DmFFyyuF6zww6Td6VMkbe07Lpv-IwfE1tKp0UhL5J_KozpFwenxAf3mANsFi8zb1UBcKg3lfEcVw77Hf5lMSSGOXlia1yWHzl2IrDdnCHUkJckA4ip3A/s960/Anime%20sky%20landscape%20live%20wallpaper.gif',
           }}
           style={styles.image}>
-          <Text style={styles.textBaku}>Baku</Text>
+          {/* <Text style={styles.textBaku}>Baku</Text>
           <Image
             source={require('../../assets/icons/iconCloudy.png')}
             style={styles.iconImage}
@@ -46,7 +44,7 @@ const Home = () => {
               textAlign: 'center',
             }}>
             Friday, 26 August 2022 | 10:00
-          </Text>
+          </Text> */}
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.buttonFiveDays}
@@ -75,33 +73,10 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
-  textBaku: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: 'white',
-    marginLeft: 165,
-    marginTop: 20,
-  },
   image: {
     flex: 1,
     width: 417,
     height: 1350,
-  },
-  iconImage: {
-    width: 169,
-    height: 132,
-    marginTop: 50,
-    marginLeft: 110,
-  },
-  textTemperature: {
-    fontSize: 110,
-    fontWeight: '300',
-    color: 'white',
-  },
-  imageDegree: {
-    width: 20,
-    height: 20,
-    marginTop: 37,
   },
   buttonContainer: {
     marginTop: 200,

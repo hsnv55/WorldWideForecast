@@ -1,14 +1,16 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {ImageBackground, StyleSheet} from 'react-native';
+import {ImageBackground, StyleSheet, Text, SafeAreaView} from 'react-native';
 
 const History = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ImageBackground
-        source={require('../../assets/images/historyFon.png')}
+        // source={require('../../assets/images/historyFon.png')}
         style={styles.mainImage}
-      />
+        source={require('../../assets/images/historyFon.png')}>
+        <Text style={{color: 'white', fontSize: 30}}>HELLO</Text>
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -23,19 +25,5 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 417,
     height: 1000,
-  },
-  imageBackArrow: {
-    width: 30,
-    height: 30,
-    marginLeft: 4,
-    marginTop: 3,
-  },
-  buttonBackArrow: {
-    backgroundColor: '#A9ADBA',
-    width: 35,
-    height: 35,
-    borderRadius: 5,
-    marginTop: 20,
-    marginLeft: 10,
   },
 });
