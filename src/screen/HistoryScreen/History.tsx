@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import {useSelector} from 'react-redux';
-import {RootState} from '../reduxs/store';
+import {RootState} from '../../reduxs/store';
 
 const History = () => {
   const {weter} = useSelector((state: RootState) => state.history);
@@ -17,7 +17,7 @@ const History = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ImageBackground
-        source={require('../assets/images/historyFon.png')}
+        source={require('../../assets/images/historyFon.png')}
         style={styles.mainImage}>
         <ScrollView contentContainerStyle={{paddingVertical: 20}}>
           {weter?.map((item, index) => {
